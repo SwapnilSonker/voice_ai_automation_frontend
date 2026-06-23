@@ -1,6 +1,9 @@
 import { useRef, useState, useCallback } from "react";
 
-const WS_URL = "ws://localhost:8000/ws/conversation";
+const isLocal = typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1");
+const WS_URL = isLocal
+  ? "ws://localhost:8000/ws/conversation"
+  : "wss://voice-ai-automation-backend.onrender.com/ws/conversation";
 
 export function useVoiceAgent() {
   const wsRef = useRef(null);
